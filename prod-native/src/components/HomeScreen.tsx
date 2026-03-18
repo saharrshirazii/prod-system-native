@@ -1,10 +1,19 @@
-import {  Image, StyleSheet, Text, Touchable, TouchableOpacity, View } from "react-native";
+import {  Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack"; 
 import React from 'react';
 import { colors } from "../utils/color";
 import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../type/types"
 
-const HomeScreen = () => {
-  const navigation = useNavigation();
+
+type HomeScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "HOME"
+>;
+
+
+const HomeScreen: React.FC = () => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
   
   const handleLogin = () => {
     navigation.navigate("LOGIN");
@@ -61,7 +70,7 @@ const styles = StyleSheet.create({
       subTitle:{
         fontSize: 20,
         textAlign: "center",
-        color: colors.scondary,
+        color: colors.secondary,
         fontFamily: "playfair",
         marginVertical: 20,
       },
