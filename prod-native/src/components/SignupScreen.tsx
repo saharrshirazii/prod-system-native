@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View , Alert} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Alert} from 'react-native';
 import React , { useState }from 'react';
 import { Ionicons, SimpleLineIcons } from '@expo/vector-icons';
 import { colors } from '../utils/color'
@@ -8,36 +8,31 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../type/types';
 
-const LoginScreen = () => {
+const SignupScreen = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [secureEntry, setsecureEntry] = useState<boolean>(true);
+    const [phone, setPhone] = useState<string>('');
+    const [secureEntry, setSecureEntry] = useState<boolean>(true);
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
     const handleGoBack = () => {
         navigation.goBack();
     };
 
-    const handleSignup = () => {
-        navigation.navigate("SIGNUP")
-    }
-
     const handleLogin = () => {
-        const emailValidation = /\S+@\S+\.\S+/;
-        if(!emailValidation.test(email)){
-            Alert.alert("Fel", "Vänligen ange en giltig e-postadress.");
-            return;
-        }
-        if (password.length < 6) {
-            Alert.alert("Fel", "Lösenordet måste vara minst 6 tecken långt.");
-            return;
-        }
-
-        console.log("Inloggning lyckades!");
-        navigation.replace("TIMER");    
+        navigation.navigate("LOGIN")
     };
 
+    const handleSignup = () => {
+        if (!email.includes('@') || password.length < 6 || phone.length < 5) {
+            Alert.alert("Fel", "Vänligen fyll i alla fält korrekt.");
+            return;
+        }
 
+        console.log("Registrerar:", { email, password, phone });
+        // After signup logic, usually you go to login or the app
+        navigation.replace("TIMER");
+    };
 
     return (
         <View style={styles.container}>
@@ -49,7 +44,7 @@ const LoginScreen = () => {
                 />
             </TouchableOpacity>
             <View style={styles.textContainer}>
-                <Text style={styles.headingText}>Hej!{"\n"}Välkommen{"\n"}Tillbaka</Text>
+                <Text style={styles.headingText}>Låt{"\n"}Oss{"\n"}Börja</Text>
             </View>
             <View style={styles.formContainer}>
 
@@ -61,9 +56,10 @@ const LoginScreen = () => {
                     style={styles.textInput} 
                     placeholder='Ange din e-postadress' 
                     placeholderTextColor={colors.secondary} 
-                    onChangeText={(e) => setEmail(e)}
-                    autoCapitalize="none"/>
-                    
+                    value={email}
+                    onChangeText={(text: string) => setEmail(text)}
+                    autoCapitalize="none"
+                    />
                 </View>
 
                 {/* Password Input */}
@@ -74,20 +70,31 @@ const LoginScreen = () => {
                     style={styles.textInput} 
                     placeholder='Ange ditt lösenord' 
                     placeholderTextColor={colors.secondary} 
-                    onChangeText={(text) => setPassword(text)}/>
+                    value={password}
+                    onChangeText={(text: string) => setPassword(text)}
+                    />
                     <TouchableOpacity onPress={()=>{
                         setsecureEntry((prev)=>!prev);
                     }}>
                         <SimpleLineIcons name={'eye'} size={20} color={colors.secondary} />
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity>
-                    <Text style={styles.forgetPasswordText}>Glömt lösenordet?</Text>
-                </TouchableOpacity>
 
-                {/* Login Button */}
-                <TouchableOpacity  style={styles.loginButtonWrapper} onPress={handleLogin}>
-                    <Text style={styles.loginButtonText}>Logga In</Text>
+                {/* Phone Number */}
+                 <View style={styles.inputContainer}>
+                    <SimpleLineIcons name={'screen-smartphone'} size={30} color={colors.secondary} />
+                    <TextInput 
+                    keyboardType= "phone-pad" 
+                    style={styles.textInput}
+                    placeholder='Ange ditt telefonnummer' 
+                    placeholderTextColor={colors.secondary} 
+                    value={phone}
+                    onChangeText={(text: string) => setPhone(text)}/>
+                    
+                </View>
+                
+                <TouchableOpacity  style={styles.loginButtonWrapper}>
+                    <Text style={styles.loginButtonText}>Registrera dig</Text>
                 </TouchableOpacity>
                 <Text style={styles.continueText}>Eller fortsätt med</Text>
                 <TouchableOpacity style={styles.googleButtonContainer}>
@@ -95,9 +102,9 @@ const LoginScreen = () => {
                     <Text style={styles.googleText}>Google</Text>
                 </TouchableOpacity>
                 <View style = {styles.footerContainer}>
-                    <Text style = {styles.accountText}>Har du inget konto?</Text>
-                    <TouchableOpacity onPress={handleSignup}>
-                      <Text style = {styles.signupText}>Registrera dig</Text>
+                    <Text style = {styles.accountText}>Har du redan ett konto?</Text>
+                    <TouchableOpacity onPress={handleLogin}>
+                    <Text style = {styles.signupText}>Logga in</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -106,7 +113,7 @@ const LoginScreen = () => {
     )
 }
 
-export default LoginScreen
+export default SignupScreen
 
 const styles = StyleSheet.create({
     container: {
