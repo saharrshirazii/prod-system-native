@@ -93,7 +93,8 @@ const SignupScreen = () => {
                     
                 </View>
                 
-                <TouchableOpacity  style={styles.loginButtonWrapper}>
+               {/* Button */}
+                <TouchableOpacity  style={styles.loginButtonWrapper} onPress={handleSignup}> 
                     <Text style={styles.loginButtonText}>Registrera dig</Text>
                 </TouchableOpacity>
                 <Text style={styles.continueText}>Eller fortsätt med</Text>
