@@ -5,12 +5,14 @@ import { colors } from '../utils/color'
 import { TextInput } from 'react-native';
 import { Image } from 'react-native/';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../type/types';
 
 const LoginScreen = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [secureEntry, setsecureEntry] = useState(true);
-    const navigation = useNavigation();
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [secureEntry, setsecureEntry] = useState<boolean>(true);
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
     const handleGoBack = () => {
         navigation.goBack();

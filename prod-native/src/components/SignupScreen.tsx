@@ -1,14 +1,19 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Alert} from 'react-native';
 import React , { useState }from 'react';
 import { Ionicons, SimpleLineIcons } from '@expo/vector-icons';
 import { colors } from '../utils/color'
 import { TextInput } from 'react-native';
 import { Image } from 'react-native/';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../type/types';
 
 const SignupScreen = () => {
-    const [secureEntry, setsecureEntry] = useState(true);
-    const navigation = useNavigation();
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [phone, setPhone] = useState<string>('');
+    const [secureEntry, setSecureEntry] = useState<boolean>(true);
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
     const handleGoBack = () => {
         navigation.goBack();
@@ -16,6 +21,17 @@ const SignupScreen = () => {
 
     const handleLogin = () => {
         navigation.navigate("LOGIN")
+    };
+
+    const handleSignup = () => {
+        if (!email.includes('@') || password.length < 6 || phone.length < 5) {
+            Alert.alert("Fel", "Vänligen fyll i alla fält korrekt.");
+            return;
+        }
+
+        console.log("Registrerar:", { email, password, phone });
+        // After signup logic, usually you go to login or the app
+        navigation.replace("TIMER");
     };
 
     return (
@@ -31,22 +47,49 @@ const SignupScreen = () => {
                 <Text style={styles.headingText}>Låt{"\n"}Oss{"\n"}Börja</Text>
             </View>
             <View style={styles.formContainer}>
+
+                {/* Email Input */}
                 <View style={styles.inputContainer}>
                     <Ionicons name={'mail-outline'} size={25} color={colors.secondary} />
-                    <TextInput keyboardType='email-address' style={styles.textInput} placeholder='Ange din e-postadress' placeholderTextColor={colors.secondary} />
+                    <TextInput 
+                    keyboardType='email-address' 
+                    style={styles.textInput} 
+                    placeholder='Ange din e-postadress' 
+                    placeholderTextColor={colors.secondary} 
+                    value={email}
+                    onChangeText={(text: string) => setEmail(text)}
+                    autoCapitalize="none"
+                    />
                 </View>
+
+                {/* Password Input */}
                 <View style={styles.inputContainer}>
                     <SimpleLineIcons name={'lock'} size={25} color={colors.secondary} />
-                    <TextInput secureTextEntry={secureEntry} style={styles.textInput} placeholder='Ange ditt lösenord' placeholderTextColor={colors.secondary} />
+                    <TextInput 
+                    secureTextEntry={secureEntry} 
+                    style={styles.textInput} 
+                    placeholder='Ange ditt lösenord' 
+                    placeholderTextColor={colors.secondary} 
+                    value={password}
+                    onChangeText={(text: string) => setPassword(text)}
+                    />
                     <TouchableOpacity onPress={()=>{
                         setsecureEntry((prev)=>!prev);
                     }}>
                         <SimpleLineIcons name={'eye'} size={20} color={colors.secondary} />
                     </TouchableOpacity>
                 </View>
+
+                {/* Phone Number */}
                  <View style={styles.inputContainer}>
                     <SimpleLineIcons name={'screen-smartphone'} size={30} color={colors.secondary} />
-                    <TextInput keyboardType= "phone-pad" style={styles.textInput} placeholder='Ange ditt telefonnummer' placeholderTextColor={colors.secondary} />
+                    <TextInput 
+                    keyboardType= "phone-pad" 
+                    style={styles.textInput}
+                    placeholder='Ange ditt telefonnummer' 
+                    placeholderTextColor={colors.secondary} 
+                    value={phone}
+                    onChangeText={(text: string) => setPhone(text)}/>
                     
                 </View>
                 
