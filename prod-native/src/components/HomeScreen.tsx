@@ -17,22 +17,25 @@ const HomeScreen: React.FC = () => {
   
   const handleLogin = () => {
     navigation.navigate("LOGIN");
+  };
 
-  }
+   const handleSignup = () => {
+    navigation.navigate("SIGNUP");
+  };
 
 
   return (
     <View style={styles.container}>
       <Image source = {require("../../assets/logo.jpg")} style = {styles.logo}/>
       <Image source = {require("../../assets/main.jpg")} style = {styles.bannerImage}/>
-      <Text style = {styles.title}>This is our Productivity App.</Text>
+      <Text style = {styles.title}>Welcomee to your app</Text>
       <Text style = {styles.subTitle}>Please login</Text>
      
       <View style = {styles.butonContainer}>
         <TouchableOpacity style={[styles.loginButtonWrapper , {backgroundColor: colors.primary},]} onPress={handleLogin}>
           <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.loginButtonWrapper]}>
+        <TouchableOpacity style={[styles.loginButtonWrapper]} onPress={handleSignup}>
           <Text style={styles.signupButtonText}>Sign-Up</Text>
         </TouchableOpacity>
       </View>

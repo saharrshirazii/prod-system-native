@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View , Alert} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React , { useState }from 'react';
 import { Ionicons, SimpleLineIcons } from '@expo/vector-icons';
 import { colors } from '../utils/color'
@@ -6,9 +6,7 @@ import { TextInput } from 'react-native';
 import { Image } from 'react-native/';
 import { useNavigation } from '@react-navigation/native';
 
-const LoginScreen = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+const SignupScreen = () => {
     const [secureEntry, setsecureEntry] = useState(true);
     const navigation = useNavigation();
 
@@ -16,26 +14,9 @@ const LoginScreen = () => {
         navigation.goBack();
     };
 
-    const handleSignup = () => {
-        navigation.navigate("SIGNUP")
-    }
-
     const handleLogin = () => {
-        const emailValidation = /\S+@\S+\.\S+/;
-        if(!emailValidation.test(email)){
-            Alert.alert("Fel", "Vänligen ange en giltig e-postadress.");
-            return;
-        }
-        if (password.length < 6) {
-            Alert.alert("Fel", "Lösenordet måste vara minst 6 tecken långt.");
-            return;
-        }
-
-        console.log("Inloggning lyckades!");
-        navigation.replace("TIMER");    
+        navigation.navigate("LOGIN")
     };
-
-
 
     return (
         <View style={styles.container}>
@@ -47,45 +28,30 @@ const LoginScreen = () => {
                 />
             </TouchableOpacity>
             <View style={styles.textContainer}>
-                <Text style={styles.headingText}>Hej!{"\n"}Välkommen{"\n"}Tillbaka</Text>
+                <Text style={styles.headingText}>Låt{"\n"}Oss{"\n"}Börja</Text>
             </View>
             <View style={styles.formContainer}>
-
-                {/* Email Input */}
                 <View style={styles.inputContainer}>
                     <Ionicons name={'mail-outline'} size={25} color={colors.secondary} />
-                    <TextInput 
-                    keyboardType='email-address' 
-                    style={styles.textInput} 
-                    placeholder='Ange din e-postadress' 
-                    placeholderTextColor={colors.secondary} 
-                    onChangeText={(e) => setEmail(e)}
-                    autoCapitalize="none"/>
-                    
+                    <TextInput keyboardType='email-address' style={styles.textInput} placeholder='Ange din e-postadress' placeholderTextColor={colors.secondary} />
                 </View>
-
-                {/* Password Input */}
                 <View style={styles.inputContainer}>
                     <SimpleLineIcons name={'lock'} size={25} color={colors.secondary} />
-                    <TextInput 
-                    secureTextEntry={secureEntry} 
-                    style={styles.textInput} 
-                    placeholder='Ange ditt lösenord' 
-                    placeholderTextColor={colors.secondary} 
-                    onChangeText={(text) => setPassword(text)}/>
+                    <TextInput secureTextEntry={secureEntry} style={styles.textInput} placeholder='Ange ditt lösenord' placeholderTextColor={colors.secondary} />
                     <TouchableOpacity onPress={()=>{
                         setsecureEntry((prev)=>!prev);
                     }}>
                         <SimpleLineIcons name={'eye'} size={20} color={colors.secondary} />
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity>
-                    <Text style={styles.forgetPasswordText}>Glömt lösenordet?</Text>
-                </TouchableOpacity>
-
-                {/* Login Button */}
-                <TouchableOpacity  style={styles.loginButtonWrapper} onPress={handleLogin}>
-                    <Text style={styles.loginButtonText}>Logga In</Text>
+                 <View style={styles.inputContainer}>
+                    <SimpleLineIcons name={'screen-smartphone'} size={30} color={colors.secondary} />
+                    <TextInput keyboardType= "phone-pad" style={styles.textInput} placeholder='Ange ditt telefonnummer' placeholderTextColor={colors.secondary} />
+                    
+                </View>
+                
+                <TouchableOpacity  style={styles.loginButtonWrapper}>
+                    <Text style={styles.loginButtonText}>Registrera dig</Text>
                 </TouchableOpacity>
                 <Text style={styles.continueText}>Eller fortsätt med</Text>
                 <TouchableOpacity style={styles.googleButtonContainer}>
@@ -93,9 +59,9 @@ const LoginScreen = () => {
                     <Text style={styles.googleText}>Google</Text>
                 </TouchableOpacity>
                 <View style = {styles.footerContainer}>
-                    <Text style = {styles.accountText}>Har du inget konto?</Text>
-                    <TouchableOpacity onPress={handleSignup}>
-                      <Text style = {styles.signupText}>Registrera dig</Text>
+                    <Text style = {styles.accountText}>Har du redan ett konto?</Text>
+                    <TouchableOpacity onPress={handleLogin}>
+                    <Text style = {styles.signupText}>Logga in</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -104,7 +70,7 @@ const LoginScreen = () => {
     )
 }
 
-export default LoginScreen
+export default SignupScreen
 
 const styles = StyleSheet.create({
     container: {
