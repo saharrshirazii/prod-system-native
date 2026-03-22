@@ -1,4 +1,4 @@
-//SAMLING AV ALLA VÄRDEN SOM INTE SKA ÄNDRAS. GÅR ATT FREESTYLA MED FÄRGERNA UTIFRÅN BEHOV.
+//SAMLING AV ALLA VÄRDEN SOM INTE SKA ÄNDRAS.
  // Glöm ej att imoortera i timer.tsx filen. 
 
  //--- Tiderna i minuter, kan enklast ändras här vid test av andra värden ---
