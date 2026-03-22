@@ -17,6 +17,7 @@ const App = () =>{
   <NavigationContainer>
     <Stack.Navigator
         screenOptions={{ headerShown: false }}
+        initialRouteName="TIMER"   // starta direkt på Timer-sidan
         >
       <Stack.Screen name={"HOME"} component={HomeScreen} />
       <Stack.Screen name={"LOGIN"} component={LoginScreen} />
