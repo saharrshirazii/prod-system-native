@@ -28,7 +28,7 @@ const HomeScreen: React.FC = () => {
     <View style={styles.container}>
       <Image source = {require("../../assets/logo.jpg")} style = {styles.logo}/>
       <Image source = {require("../../assets/main.jpg")} style = {styles.bannerImage}/>
-      <Text style = {styles.title}>Welcomee to your app</Text>
+      <Text style = {styles.title}>Welcome to your app</Text>
       <Text style = {styles.subTitle}>Please login</Text>
      
       <View style = {styles.butonContainer}>
