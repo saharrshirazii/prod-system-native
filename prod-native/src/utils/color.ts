@@ -18,7 +18,7 @@ background: "#111827", //ändra bakgrundbild efter behov
 
 
 // Knappar
-start: "#135DFC",
+start: "#289150",
 pause: "#E5E7EB",
 resume: "#135DFC",
 stop: "#E8000B",
