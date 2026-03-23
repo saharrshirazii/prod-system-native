@@ -31,7 +31,7 @@ const SignupScreen = () => {
 
         console.log("Registrerar:", { email, password, phone });
         // After signup logic, usually you go to login or the app
-        navigation.replace("TIMER");
+        navigation.replace("TABNAV");
     };
 
     return (

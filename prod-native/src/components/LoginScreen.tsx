@@ -34,7 +34,7 @@ const LoginScreen = () => {
         }
 
         console.log("Inloggning lyckades!");
-        navigation.replace("TIMER");    
+        navigation.replace("TABNAV");    
     };
 
 
