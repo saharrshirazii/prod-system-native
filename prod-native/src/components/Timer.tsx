@@ -1,11 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View,TouchableOpacity, Dimensions } from 'react-native'
+import {useState, useEffect, useRef} from 'react'
+import {POMODORA} from '../constants/pomodoraConfig';
+import { Entypo } from '@expo/vector-icons';
 
 const Timer = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Pomodora-sidan är här!</Text>
+
+      <Entypo name="controller-play" size={24} color="black" /> 
+      <Entypo name="controller-paus" size={24} color="black" />
+      <Entypo name="controller-stop" size={24} color="black" />
     </View>
+    
   )
 }
 
