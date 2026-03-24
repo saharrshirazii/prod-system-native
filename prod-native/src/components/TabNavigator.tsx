@@ -8,6 +8,13 @@ import { colors } from '../utils/color';
 
 const Tab = createBottomTabNavigator();
 
+/**
+ * Huvudkomponent för appens fliknavigering (Bottom Tab Navigation).
+ * * Denna navigator definierar den nedre menyraden och kopplar samman 
+ * appens huvudvyer: Dashboard, Timer och Logga ut.
+ * * @returns {React.ReactElement} En konfigurerad Tab.Navigator från @react-navigation/bottom-tabs.
+ */
+
 const TabNavigator = () => {
   return (
     <Tab.Navigator
