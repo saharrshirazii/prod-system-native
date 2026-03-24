@@ -9,10 +9,6 @@ export const colors = {
 
 // ---POMODORA FÄRGER---
 
-work: "#FF6B6B",
-shortBreak: "#4ECDC4",
-longBreak: "#45B7D1",
-
 //Bakgrund
 background: "#111827", //ändra bakgrundbild efter behov
 
