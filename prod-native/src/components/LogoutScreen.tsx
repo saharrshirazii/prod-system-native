@@ -5,6 +5,12 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../type/types';
 import { colors } from '../utils/color';
 
+/**
+ * Vy för utloggning där användaren kan bekräfta att de vill lämna appen.
+ * Vid tryck på knappen navigeras användaren tillbaka till "HOME" (vår startskärm/inloggning).
+ * * @returns {React.ReactElement} En vy med en utloggningsknapp.
+ */
+
 const LogoutScreen = ()=>{
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
